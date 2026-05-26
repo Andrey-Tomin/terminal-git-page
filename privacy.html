@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - DevOps Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #07080c;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 3rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+        p, li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+    <h1>Privacy Policy</h1>
+    <p>Last updated: May 26, 2026</p>
+    
+    <p>At DevOps Terminal, we take security and privacy seriously. Because of the local-first architecture of the application, we do not store, process, or transmit your private terminal logs, credentials, server configurations, or ssh keys.</p>
+
+    <h2>1. Data We Do Not Collect</h2>
+    <p>We do not collect any of the following:</p>
+    <ul>
+        <li>Your SSH keys, private keys, passwords, or connection credentials.</li>
+        <li>Your server IP addresses, hostnames, or usernames.</li>
+        <li>Your terminal command history or console outputs.</li>
+        <li>Your RDP desktop visual feed.</li>
+        <li>Your SFTP transferred files.</li>
+    </ul>
+
+    <h2>2. Local-Only Encrypted Storage</h2>
+    <p>All sensitive information, including credentials and configurations, is stored strictly on your local Mac. DevOps Terminal encrypts this information using hardware-bound AES-256 (via macOS Keychain APIs and securely derived keys tied to your motherboard's Hardware UUID) to prevent unauthorized decryption.</p>
+
+    <h2>3. AI Processing Integration</h2>
+    <p>If you choose to use the built-in Gemini AI Assistant for explaining logs or debugging commands, only the specific log outputs or prompts that you explicitly submit are sent directly to the Gemini API. These logs are processed immediately and are not collected or shared for training purposes.</p>
+
+    <h2>4. App Store Transactions</h2>
+    <p>All in-app purchases and subscriptions are handled safely and securely by Apple Inc. via StoreKit. We do not receive, store, or process your credit card numbers or payment details.</p>
+
+    <h2>5. Contact Us</h2>
+    <p>If you have any questions or feedback regarding our privacy policy, please contact support: <a href="support.html">Support and Feedback Page</a>.</p>
+</body>
+</html>

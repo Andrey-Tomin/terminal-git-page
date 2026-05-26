@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Terminal - Premium multi-tab workspace for macOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #07080c;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-glow: rgba(99, 102, 241, 0.15);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glowing Background elements */
+        .glow-top {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50%;
+            height: 50%;
+            background: var(--primary-glow);
+            filter: blur(140px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .glow-bottom {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 50%;
+            height: 50%;
+            background: rgba(16, 185, 129, 0.05);
+            filter: blur(140px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-indigo), #4f46e5);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.25rem;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: color 0.2s;
+            margin-left: 1.5rem;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #a5b4fc;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-w: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .screenshot-container {
+            max-width: 1000px;
+            margin: 2rem auto 5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 0.5rem;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            border-radius: 1rem;
+            display: block;
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-cols: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 4.5rem;
+            }
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+            backdrop-filter: blur(20px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-top"></div>
+    <div class="glow-bottom"></div>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon">&gt;_</div>
+            <div class="logo-text">DevOps Terminal</div>
+        </div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="support.html">Support</a>
+            <a href="privacy.html">Privacy</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🚀 v1.5.8 Now Available</div>
+            <h1>The Ultimate macOS Workspace<br>for DevOps Engineers</h1>
+            <p class="subtitle">Secure multi-tab SSH & RDP client with Gemini AI integration, advanced SFTP transfers, and server monitors.</p>
+            
+            <div class="screenshot-container">
+                <img src="app_store_purchase_icon.png" alt="DevOps Terminal App Icon" style="max-width: 200px; margin: 2rem auto; display: block; border-radius: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: 2rem; text-align: center; font-weight: 900; letter-spacing: -0.02em;">Engineered for Operations & Scale</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🖥️</div>
+                    <h3 class="feature-title">Smart RDP & SSH Workspace</h3>
+                    <p class="feature-desc">Organize all your console and graphical connections with native multi-tab organization. Fast, reactive, and fluid switching.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Gemini AI Assistant</h3>
+                    <p class="feature-desc">Integrated analytical support. Explain complex console logs, diagnose connection errors, and compose automation scripts directly on-the-fly.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3 class="feature-title">Advanced SFTP File Manager</h3>
+                    <p class="feature-desc">Dual-pane files, background transfer queue, and built-in remote configuration editor with full Regex search.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Strictly Local & Encrypted</h3>
+                    <p class="feature-desc">All keys, credentials, history, and databases are hardware-bound encrypted and stored strictly on your local machine.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Andrey Tomin. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="support.html">Support & Contact</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+</html>
